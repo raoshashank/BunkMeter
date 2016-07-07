@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10sp">
+
+
+
+    <EditText
+        android:padding="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/subject_entry"
+        android:textAlignment="center"
+        android:hint="Enter Subject Name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+
+    <EditText
+        android:hint="Enter Bunking Limit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bunk_limit"
+        android:layout_marginTop="35dp"
+        android:textAlignment="center"
+        android:inputType="number"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="done"
+        android:id="@+id/done"
+        android:layout_weight="1"
+
+        android:layout_gravity="right"
+        android:singleLine="true"
+        android:background="@color/color_light"
+        android:layout_below="@+id/bunk_limit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="46dp"
+        android:layout_marginStart="46dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="cancel"
+        android:id="@+id/cancel"
+        android:layout_weight="1"
+        android:singleLine="true"
+        android:background="@color/light_blue"
+        android:layout_below="@+id/bunk_limit"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="28dp"
+        android:layout_marginEnd="28dp" />
+
+
+</RelativeLayout>

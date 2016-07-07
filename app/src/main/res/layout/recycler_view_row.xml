@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+     android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="1"
+    android:padding="5sp"
+    android:id="@+id/relout"
+    >
+<android.support.v7.widget.CardView
+    android:elevation="30sp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="5sp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/subject_entry_recycler"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/image"
+        android:background="@color/color_light"
+        android:layout_toLeftOf="@+id/image" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/bunks"
+        android:layout_below="@+id/bunking_limit"
+        android:layout_alignLeft="@+id/bunking_limit"
+        android:layout_alignStart="@+id/bunking_limit"
+        android:layout_alignRight="@+id/bunking_limit"
+        android:layout_alignEnd="@+id/bunking_limit"
+        android:background="@color/light_red"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/bunking_limit"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/subject_entry_recycler"
+        android:layout_alignStart="@+id/subject_entry_recycler"
+        android:layout_marginTop="28dp"
+        android:layout_toLeftOf="@+id/image"
+        android:layout_toStartOf="@+id/image"
+        android:background="@color/light_blue"/>
+
+    <ImageButton
+        android:backgroundTint="@color/cardview_dark_background"
+        android:layout_width="90sp"
+        android:layout_height="wrap_content"
+        android:id="@+id/image"
+        android:layout_alignTop="@+id/subject_entry_recycler"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/bunks"
+        android:src="@drawable/ic_add_icon"/>
+</RelativeLayout>
+</android.support.v7.widget.CardView>
+
+</RelativeLayout>
