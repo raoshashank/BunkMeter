@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
                 for(Subject s : subject_list) {
                     msg += "\n Subject : " + s.getSubject_name()
                             + "\n Classes Bunked : " + String.valueOf(s.getMax_bunkhours()) +
-                            "\n limit : " + String.valueOf(s.getMax_bunkhours()) + "\n-------";
+                            "\n limit : " + String.valueOf(s.getHours_bunked()) + "\n-------";
                 }
                     Intent sendIntent = new Intent();
                     sendIntent.setAction(Intent.ACTION_SEND);
