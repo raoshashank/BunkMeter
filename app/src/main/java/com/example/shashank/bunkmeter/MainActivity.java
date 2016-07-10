@@ -2,6 +2,8 @@ package com.example.shashank.bunkmeter;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,32 +47,6 @@ public class MainActivity extends AppCompatActivity {
     List<Subject> subject_list;
     public SQLiteDatabase db;
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, final View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater inflater= getMenuInflater();
-        inflater.inflate(R.menu.contextmenu,menu);
-        Button edit = (Button)findViewById(R.id.action_edit);
-        edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-
-
-            }
-        });
-
-
-        Button del = (Button)findViewById(R.id.action_delete);
-        del.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,31 +59,18 @@ public class MainActivity extends AppCompatActivity {
 
         mProvider = new DB_Provider(this);
         mProvider.open();
-
-
+        TextView title = (TextView)findViewById(R.id.title);
         subject_list = mProvider.getSubjectsFromDatabase();
         mProvider.close();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         mAdapter = new SubjectAdapter(this, subject_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mAdapter);
-      registerForContextMenu(recyclerView);
-      recyclerView.setOnLongClickListener(new View.OnLongClickListener() {
-          @Override
-          public boolean onLongClick(View view) {
-              ContextMenu contextMenu ;
-                Toast.makeText(MainActivity.this,"long click",Toast.LENGTH_SHORT).show();
+        if(subject_list.isEmpty())
+        {
+            Snackbar.make(recyclerView,"Hey!Go on and press the + Button to proudly add in your first Bunk!Swipe to dismiss",Snackbar.LENGTH_INDEFINITE).show();
 
-
-              return true;
-          }
-      });
-
-
-
-
-
-
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -146,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
 
-                    cancel.setOnClickListener(new View.OnClickListener() {
+                                        cancel.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             entry.dismiss();
@@ -161,7 +125,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
+
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -177,18 +145,65 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         switch (id) {
-           case R.id.action_tell_friend:
-                Toast.makeText(this, "Tell a Friend button clicked!", Toast.LENGTH_LONG).show();
-                break;
+
             case R.id.action_delete_all:
-                Toast.makeText(this, "Delete All button clicked!", Toast.LENGTH_LONG).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Are you Sure you want to delete all subjects?? This action CANNOT BE UNDONE!")
+                        .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                mProvider.deleteall();
+                                subject_list.clear();
+                                dialogInterface.dismiss();
+                                recyclerView.getAdapter().notifyDataSetChanged();
+                                mAdapter.notifyDataSetChanged();
+
+                            }
+                        }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                }).create().show();
+
                 break;
-            case R.id.notification_settings:
-                Toast.makeText(this, "Notify button clicked!", Toast.LENGTH_LONG).show();
-                break;
+
+            case R.id.about :
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                builder1.setMessage(" Hey! Nice of You to show Interest in Bunkmeter!!This App Records your bunking details and was created by" +
+                        " Shashank Rao from NITK Surathkal during his free time! Hope you liked it ! Now go back to your" +
+                        " bunking! ;)").setPositiveButton("COOL!", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                }).setNegativeButton("AWESOME!", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                }).create().show();break;
+
+            case R.id.menu_item_share : {
+                String msg=new String();
+                msg+="Bunking Details:\n";
+                for(Subject s : subject_list) {
+                    msg += "\n Subject : " + s.getSubject_name()
+                            + "\n Classes Bunked : " + String.valueOf(s.getMax_bunkhours()) +
+                            "\n limit : " + String.valueOf(s.getMax_bunkhours()) + "\n-------";
+                }
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, msg);
+                    sendIntent.setType("text/plain");
+                    startActivity(sendIntent);
+                    break;
+
+            }
+
         }
+
 
         return super.onOptionsItemSelected(item);
     }

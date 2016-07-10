@@ -22,12 +22,14 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/subject_entry_recycler"
+        android:inputType="textLongMessage"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/image"
         android:background="@color/color_light"
-        android:layout_toLeftOf="@+id/image" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -59,11 +61,11 @@
         android:layout_width="90sp"
         android:layout_height="wrap_content"
         android:id="@+id/image"
-        android:layout_alignTop="@+id/subject_entry_recycler"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignBottom="@+id/bunks"
-        android:src="@drawable/ic_add_icon"/>
+        android:src="@drawable/ic_add_icon"
+        android:layout_alignTop="@+id/bunking_limit" />
 </RelativeLayout>
 </android.support.v7.widget.CardView>
 

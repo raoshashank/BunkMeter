@@ -70,15 +70,15 @@ public class DB_Provider {
 
     }
 
-    public void updateSubjectInDatabase(Subject subject,String oldname){
-        db=mHelper.getWritableDatabase();
-        String query = "UPDATE TABLE "+DB_Helper.TABLE_NAME + "  SET " + DB_Helper.COLUMN_SUBJECT_NAME + " = "+subject.getSubject_name()
-        +" , "+DB_Helper.COLUMN_HOURS_BUNKED +" = "+ subject.getHours_bunked()+ " , "+DB_Helper.COLUMN_MAX_HOURS_BUNKED + " = "+ subject.getMax_bunkhours()
-        + "WHERE "+ DB_Helper.COLUMN_SUBJECT_NAME + " = " + oldname;
-
+    public void updatehours(Subject subject){
         try {
-            db.execSQL(query, null);
-        }catch (SQLException s){
+            db=mHelper.getWritableDatabase();
+                ContentValues values = new ContentValues();
+            values.put(DB_Helper.COLUMN_HOURS_BUNKED, subject.getHours_bunked());
+
+                db.update(DB_Helper.TABLE_NAME,values,DB_Helper.COLUMN_SUBJECT_NAME + "='" + subject.getSubject_name()+"'",null);
+
+        }catch (Exception s){
             Log.i("Error",s.toString());
         }
     }
@@ -87,15 +87,34 @@ public class DB_Provider {
 
     public void deleteFromDatabase(Subject subject){
         db=mHelper.getWritableDatabase();
-        String query = "DELETE FROM " + DB_Helper.TABLE_NAME+ "  WHERE " + DB_Helper.COLUMN_SUBJECT_NAME +" = "+ subject.getSubject_name();
         try {
-            db.execSQL(query, null);
+            db.delete(DB_Helper.TABLE_NAME,DB_Helper.COLUMN_SUBJECT_NAME + "='"+subject.getSubject_name()+"'",null);
         }catch (SQLException s){
             Log.i("Error",s.toString());
         }
-
-
     }
+
+    public void updatecompletesubject(Subject subject,String oldname) {
+
+        db=mHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DB_Helper.COLUMN_HOURS_BUNKED,subject.getHours_bunked());
+        values.put(DB_Helper.COLUMN_MAX_HOURS_BUNKED,subject.getMax_bunkhours());
+        values.put(DB_Helper.COLUMN_SUBJECT_NAME,subject.getSubject_name());
+        try{
+        db.update(DB_Helper.TABLE_NAME,values,DB_Helper.COLUMN_SUBJECT_NAME+"='"+oldname+"'",null);
+
+        }catch (SQLException s){
+
+        }
+    }
+
+
+    public void deleteall(){
+    db=mHelper.getWritableDatabase();
+        db.delete(DB_Helper.TABLE_NAME,null,null);
+    }
+
     public  List<Subject> getSubjectsFromDatabase(){
         db=mHelper.getReadableDatabase();
         List<Subject> list = new ArrayList<Subject>();

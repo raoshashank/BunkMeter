@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:padding="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/subject_entry_edit"
+        android:textAlignment="center"
+        android:hint="Enter new Subject Name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+
+    <EditText
+        android:hint="Enter new Bunking Limit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bunk_limit_edit"
+        android:layout_marginTop="35dp"
+        android:textAlignment="center"
+        android:inputType="number"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="done"
+        android:id="@+id/done_edit"
+        android:layout_weight="1"
+
+        android:layout_gravity="right"
+        android:singleLine="true"
+        android:background="@color/color_light"
+        android:layout_marginLeft="29dp"
+        android:layout_marginStart="29dp"
+        android:layout_alignTop="@+id/cancel_edit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="cancel"
+        android:id="@+id/cancel_edit"
+        android:layout_weight="1"
+        android:singleLine="true"
+        android:background="@color/light_blue"
+        android:layout_marginRight="31dp"
+        android:layout_marginEnd="31dp"
+        android:layout_below="@+id/hours_bunked_edit"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="27dp" />
+
+    <EditText
+        android:hint="Enter no. of classes already bunked"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/hours_bunked_edit"
+        android:textAlignment="center"
+        android:inputType="number"
+        android:layout_below="@+id/bunk_limit_edit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+</RelativeLayout>

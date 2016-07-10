@@ -3,26 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.shashank.bunkmeter.MainActivity">
     <item
-        android:id="@+id/action_tell_friend"
-        android:orderInCategory="100"
-        android:title="Tell A Friend"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/action_delete_all"
         android:orderInCategory="101"
         android:title="Delete all subjects"
-        app:showAsAction="never" ></item>
-
-    <item
-        android:id="@+id/notification_settings"
-        android:orderInCategory="102"
-        android:title="Notification Settings"
         app:showAsAction="never" ></item>
     <item
         android:id="@+id/about"
         android:orderInCategory="103"
         android:title="About"
         app:showAsAction="never" ></item>
+    <item
+        android:id="@+id/menu_item_share"
+        android:title="Share"
+        app:showAsAction="always"
+        android:actionProviderClass=
+            "android.widget.ShareActionProvider" />
 
 
 
