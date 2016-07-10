@@ -190,8 +190,8 @@ public class MainActivity extends AppCompatActivity {
                 msg+="Bunking Details:\n";
                 for(Subject s : subject_list) {
                     msg += "\n Subject : " + s.getSubject_name()
-                            + "\n Classes Bunked : " + String.valueOf(s.getMax_bunkhours()) +
-                            "\n limit : " + String.valueOf(s.getHours_bunked()) + "\n-------";
+                            + "\n Classes Bunked : " + String.valueOf(s.getHours_bunked()) +
+                            "\n limit : " + String.valueOf(s.getMax_bunkhours()) + "\n-------";
                 }
                     Intent sendIntent = new Intent();
                     sendIntent.setAction(Intent.ACTION_SEND);
